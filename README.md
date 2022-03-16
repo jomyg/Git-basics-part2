@@ -1,5 +1,8 @@
-===============================================================================================================================================
+GIT branch - commit - merge - oneline
 
+
+===============================================================================================================================================
+```
 [root@ip-172-31-41-83 mydir]# ls -al
 total 20
 drwxr-xr-x 3 root root 104 Mar 16 10:19 .
@@ -33,7 +36,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 - name: " GIT Test"
   hosts: amazon
   become: true
-    - atop.yml
+    - variables.yml 
   tasks:
     
     - name: "Installing {{task1}} "
@@ -51,7 +54,9 @@ nothing added to commit but untracked files present (use "git add" to track)
 ---
 task1: "apache"
 
-
+```
+#### Now we can add and commit the contents to git
+```
 [root@ip-172-31-41-83 mydir]# git add .
 [root@ip-172-31-41-83 mydir]# git ls-files -s
 100644 bfba6d595618e2a92a672e323078a047a9ad7ea2 0       main.yml
@@ -98,12 +103,12 @@ Listing Branch Default Branch Name Is "master" github "main"
 
 [root@ip-172-31-41-83 mydir]# git branch
 * master
-
+```
 
 Working of git log
 ==============================
 - HEAD   +======> Master +---====-> Recent Commit Object Id from the master +==========> Prints the details from Commit Object
-                
+ ```               
 The above flow working is like below                 
 [root@ip-172-31-41-83 mydir]# cat .git/HEAD
 ref: refs/heads/master
@@ -194,12 +199,12 @@ Author: jomy <jomy1@gmail.com>
 Date:   Wed Mar 16 10:25:49 2022 +0000
 
      Apache installation task 1
-    
+ ```   
 ===============================================================================================================================================
 
 If we mistakenly write the commit message, we can use the command ammend to rewrite the last commit we have done. 
 ***** NB: This can be only done for last commit.
-
+```
 
 [root@ip-172-31-41-83 mydir]# git commit --amend -m " atop install"     >>>>  ihave changed the last commit message we have done above. 
 [master 170e473]  atop install
@@ -220,7 +225,8 @@ Date:   Wed Mar 16 10:25:49 2022 +0000
      Apache installation task 1
     
 ===============================================================================================================================================    
-
+```
+```
 #### Adding New tasks - docker installation
 [root@ip-172-31-41-83 mydir]# ls -l
 total 24
@@ -266,10 +272,10 @@ task3: "docker"
         state: restarted
         enabled: true
         
-        
+ ```       
 Then we will test the playbook using ansible.
 >>> Now we can add and commit the contents
-
+```
 root@ip-172-31-41-83 mydir]# git status
 On branch master
 Changes not staged for commit:
@@ -340,9 +346,9 @@ committer jomy <jomy1@gmail.com> 1647426349 +0000
 
  Apache installation task 1
 [root@ip-172-31-41-83 mydir]#
-
+```
 Now we can add some task to the play book : Adding git and test the playbook.
-
+```
 [root@ip-172-31-41-83 mydir]# cat git.yml
 ---
 task4: "git"
@@ -384,9 +390,9 @@ task4: "git"
         state: restarted
         enabled: true
         
-        
-No we can add and commit the contents
-
+```        
+Now we can add and commit the contents
+```
 [root@ip-172-31-41-83 mydir]# git status
 On branch master
 Changes not staged for commit:
@@ -455,9 +461,9 @@ Date:   Wed Mar 16 10:25:49 2022 +0000
 [root@ip-172-31-41-83 mydir]# git branch -v        
 * master f565c91 git added
   mysql  f565c91 git added
-    
+ ```   
 ##### How to Changing the default Branch
-
+```
 [root@ip-172-31-41-83 mydir]# git branch mysql
 [root@ip-172-31-41-83 mydir]# git branch
 * master
@@ -532,7 +538,8 @@ Untracked files:
         mysql.yml
 
 no changes added to commit (use "git add" and/or "git commit -a")
-
+```
+```
 [root@ip-172-31-41-83 mydir]# git add .
 [root@ip-172-31-41-83 mydir]# git commit -m "Mysql add"
 [mysql e3a71bb] Mysql add
@@ -572,8 +579,9 @@ Date:   Wed Mar 16 10:25:49 2022 +0000
     
 From above git log result. The head is pointig to mysql branch. 
 ===============================================================================================================================================
+```
 #### Now we add some extra task other than from the above and at last we can merge it all
-
+```
 [root@ip-172-31-41-83 mydir]# cat main.yml
 ---
 - name: " GIT Test"
@@ -621,8 +629,9 @@ From above git log result. The head is pointig to mysql branch.
 ---
 task6: "php-mysql"
 ===============================================================================================================================================
+```
 ### Now we can add the contents to mysql branch
-
+```
 [root@ip-172-31-41-83 mydir]# git status
 On branch mysql
 Changes not staged for commit:
@@ -712,10 +721,10 @@ git added
 100644 blob 67f19c472fecefb79354e85297a14c0921bb6b1e    git.yml
 100644 blob 3f14da129076d947fbca5f945aaeedac1af44544    main.yml
 100644 blob e4fd69837414c9d1e534e49a55085acdabda8af1    variables.yml
-
+```
 ===============================================================================================================================================
 ### Now we can switch the mysql branch to master:
-
+```
 [root@ip-172-31-41-83 mydir]# git switch master
 Switched to branch 'master'
 [root@ip-172-31-41-83 mydir]# git branch
@@ -813,11 +822,11 @@ Author: jomy <jomy1@gmail.com>
 Date:   Wed Mar 16 10:25:49 2022 +0000
 
      Apache installation task 1
-    
+
 ### If we switch to mysql brach we can see all the details as we already commited before.
 ===============================================================================================================================================
 ===============================================================================================================================================
-
+````
 ## Merge braches ### ******************************************
 
 - Fast Forward Merge
@@ -833,7 +842,7 @@ For example, having two changes where a line is added in the same place could be
 Git merge will combine multiple sequences of commits into one unified history. In the most frequent use cases, git merge is used to combine two branches.
 When merging one branch into another git merge will apply all the commits from the branch being merged from to the branch being merged into since the two diverged. 
 You can consider it as forming a new head that contains the latest state from both of the branches put together.
-
+```
 [root@ip-172-31-41-83 mydir]# git branch
 * master
   mysql
